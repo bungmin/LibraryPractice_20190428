@@ -1,9 +1,12 @@
 package com.tj.librarypractice_20190428;
 
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.net.Uri;
 import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 
 import com.bumptech.glide.Glide;
 import com.tj.librarypractice_20190428.databinding.ActivityMainBinding;
@@ -15,7 +18,6 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        act = DataBindingUtil.setContentView(this, R.layout.activity_main);
         bindViews();
         setupEvents();
         setValues();
@@ -27,6 +29,23 @@ public class MainActivity extends BaseActivity {
     @Override
     public void setupEvents() {
 
+        act.callBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+
+
+                Uri phoneUri = Uri.parse(String.format("tel:%s",act.phoneNumTxt.getText().toString()));
+                Intent intent = new Intent(Intent.ACTION_DIAL, phoneUri);
+                startActivity(intent);
+
+
+
+
+            }
+        });
+
     }
 
     @Override
@@ -37,6 +56,8 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void bindViews() {
+        act = DataBindingUtil.setContentView(this, R.layout.activity_main);
+
 
     }
 }
